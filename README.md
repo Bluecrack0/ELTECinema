@@ -47,7 +47,7 @@ Regisztráció után szükséges legyen megerősíteni az e-mail címet.
 Bejelentkezés után legyenek elérhetőek különböző nyereményjátékok stb., amelyek hetente változhatnak.
 
 ## Funkcionális követelmények
-### Funciók működése helyes felhasználás mellett
+### Funkciók működése helyes felhasználás mellett
 
 1. __Jegyfoglalás:__ 
 A felhasználó megadja az adatait, kiválasztja az ülőhelyet/helyeket a megadott időkereten belül. 
@@ -67,7 +67,7 @@ A rendszer kilistázza a keresés eredményeit.
 6. __Foglalás/Vásárlás visszavonása:__ A felhasználó a foglalást/vásárlást követő __4 órán belül__ meggondolhatja magát.
 Ebben az esetben a foglalás adatai törlődnek az adatbázisból, és vásárlás esetén megtörténik a vásárlás értékével megegyező ellentétes irányú tranzakció.
 
-### Funciók működése hibás felhasználás mellett
+### Funkciók működése hibás felhasználás mellett
 
 1. __Jegyfoglalás:__ 
 A felhasználó megadja az adatait, kiválasztja az ülőhelyet/helyeket.  
