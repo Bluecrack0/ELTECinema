@@ -1,0 +1,2 @@
+INSERT INTO USERS (USER_ID, NAME, EMAIL, PASSWORD, ROLE) VALUES (0, 'admin', 'admin@gmail.com', 'admin', 'ADMIN');
+INSERT INTO MOVIES (MOVIE_ID, TITLE, DUBBED, DIRECTOR, STORY, HOSSZ, AGE_LIMIT, TICKET_SOLD) VALUES (0, 'Titanic', true, 'Steven Spielberg', 'Ship, ocean, iceberg madafaka', 120, 'AGE_LIMIT_16', 1200);
