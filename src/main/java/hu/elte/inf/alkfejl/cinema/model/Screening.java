@@ -18,7 +18,7 @@ public class Screening implements ModelInterface, Comparable<Screening> {
 
     @Id
     @Column(name = "SCREENING_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private Integer id;
 
     @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)

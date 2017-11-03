@@ -16,7 +16,7 @@ public class Movie implements ModelInterface {
 
     @Id
     @Column(name = "MOVIE_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private Integer id;
 
     @Column(name = "TITLE", nullable = false)
@@ -43,8 +43,8 @@ public class Movie implements ModelInterface {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "ACTOR_MOVIE", joinColumns = {
-            @JoinColumn(name = "ACTOR_ID", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "MOVIE_ID",
+            @JoinColumn(name = "MOVIE_ID", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "ACTOR_ID",
                     nullable = false, updatable = false) })
     @JsonIgnore
     @Getter @Setter private List<Actor> actors;

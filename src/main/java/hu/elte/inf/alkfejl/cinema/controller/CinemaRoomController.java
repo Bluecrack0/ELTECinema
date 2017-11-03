@@ -2,6 +2,9 @@ package hu.elte.inf.alkfejl.cinema.controller;
 
 import hu.elte.inf.alkfejl.cinema.annotation.Role;
 import hu.elte.inf.alkfejl.cinema.dao.CinemaRoomDao;
+import hu.elte.inf.alkfejl.cinema.exception.DataNotValidException;
+import hu.elte.inf.alkfejl.cinema.exception.DuplicatedDataException;
+import hu.elte.inf.alkfejl.cinema.exception.MissingDataException;
 import hu.elte.inf.alkfejl.cinema.model.Actor;
 import hu.elte.inf.alkfejl.cinema.model.CinemaRoom;
 import hu.elte.inf.alkfejl.cinema.service.CinemaRoomService;
@@ -26,28 +29,44 @@ public class CinemaRoomController implements ControllerInterface<CinemaRoom>{
     @Role(ADMIN)
     @PutMapping("/update")
     public void update(@RequestBody CinemaRoom cinemaRoom) {
-        cinemaRoomService.update(cinemaRoom);
+        try {
+            cinemaRoomService.update(cinemaRoom);
+        } catch (DataNotValidException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     @Role(ADMIN)
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Integer id) {
-        cinemaRoomService.deleteById(id);
+        try {
+            cinemaRoomService.deleteById(id);
+        } catch (DataNotValidException | MissingDataException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     @Role(ADMIN)
     @DeleteMapping("/delete")
     public void delete(CinemaRoom cinemaRoom) {
-        cinemaRoomService.delete(cinemaRoom);
+        try {
+            cinemaRoomService.delete(cinemaRoom);
+        } catch (DataNotValidException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     @PostMapping("/create")
     @Role(ADMIN)
     public void create(@RequestBody CinemaRoom cinemaRoom) {
-        cinemaRoomService.create(cinemaRoom);
+        try {
+            cinemaRoomService.create(cinemaRoom);
+        } catch (DuplicatedDataException e) {
+            e.printStackTrace();
+        }
     }
 
     @Role({ADMIN, USER})

@@ -35,8 +35,8 @@ public class Actor implements ModelInterface {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "ACTOR_MOVIE", joinColumns = {
-            @JoinColumn(name = "MOVIE_ID", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "ACTOR_ID",
+            @JoinColumn(name = "ACTOR_ID", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "MOVIE_ID",
                     nullable = false, updatable = false) })
     @JsonIgnore
     @Getter @Setter private List<Movie> movies;

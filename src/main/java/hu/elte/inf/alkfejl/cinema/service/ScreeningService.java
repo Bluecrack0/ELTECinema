@@ -5,6 +5,9 @@ import hu.elte.inf.alkfejl.cinema.annotation.Role;
 import hu.elte.inf.alkfejl.cinema.dao.ActorDao;
 import hu.elte.inf.alkfejl.cinema.dao.MovieDao;
 import hu.elte.inf.alkfejl.cinema.dao.ScreeningDao;
+import hu.elte.inf.alkfejl.cinema.exception.DataNotValidException;
+import hu.elte.inf.alkfejl.cinema.exception.DuplicatedDataException;
+import hu.elte.inf.alkfejl.cinema.exception.OverLapsException;
 import hu.elte.inf.alkfejl.cinema.model.CinemaRoom;
 import hu.elte.inf.alkfejl.cinema.model.Movie;
 import hu.elte.inf.alkfejl.cinema.model.Screening;
@@ -35,6 +38,35 @@ public class ScreeningService extends AbstractService<Screening> {
     @Autowired
     private ScreeningDao screeningDao;
 
+    public boolean overlapsWithAny(Screening screening) {
+        return screeningDao.getEntities()
+                .stream()
+                .anyMatch(s -> s.screeningOverLapsWith(screening));
+    }
+
+    public void createScreening(Screening screening) throws DuplicatedDataException, OverLapsException {
+        if (!exist(screening)) {
+            if (!overlapsWithAny(screening)) {
+                screeningDao.insertEntity(screening);
+            } else {
+                throw new OverLapsException("Screening overlaps with another!");
+            }
+        } else {
+            throw new DuplicatedDataException();
+        }
+    }
+
+    public void updateScreening(Screening screening) throws DataNotValidException, OverLapsException {
+        if (exist(screening)) {
+            if (!overlapsWithAny(screening)) {
+                dao.updateEntity(screening);
+            } else {
+                throw new OverLapsException("Screening overlaps with another!");
+            }
+        } else {
+            throw new DataNotValidException();
+        }
+    }
     public void updateMovie(Integer id, Movie movie) {
         screeningDao.updateMovie(id, movie);
     }

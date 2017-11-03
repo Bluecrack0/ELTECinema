@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface ControllerInterface<Entity extends ModelInterface> {
 
-
     void update(Entity entity);
     void delete(Entity entity);
     void create(Entity entity);

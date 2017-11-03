@@ -45,7 +45,7 @@ public abstract class AbstractService<Entity extends ModelInterface> {
     }
 
     public void create(Entity entity) throws DuplicatedDataException {
-        if (!exist(entity)) {
+        if (exist(entity)) {
             dao.insertEntity(entity);
         } else {
             throw new DuplicatedDataException();

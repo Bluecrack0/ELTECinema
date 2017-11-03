@@ -1,40 +1,35 @@
 package hu.elte.inf.alkfejl.cinema.controller;
 
 import hu.elte.inf.alkfejl.cinema.annotation.Role;
-import hu.elte.inf.alkfejl.cinema.dao.DaoInterface;
-import hu.elte.inf.alkfejl.cinema.dao.MovieDao;
 import hu.elte.inf.alkfejl.cinema.exception.DataNotValidException;
 import hu.elte.inf.alkfejl.cinema.exception.DuplicatedDataException;
 import hu.elte.inf.alkfejl.cinema.exception.MissingDataException;
 import hu.elte.inf.alkfejl.cinema.model.Actor;
 import hu.elte.inf.alkfejl.cinema.model.Movie;
-import hu.elte.inf.alkfejl.cinema.model.Screening;
-import hu.elte.inf.alkfejl.cinema.service.ActorService;
+import hu.elte.inf.alkfejl.cinema.model.Reservation;
 import hu.elte.inf.alkfejl.cinema.service.MovieService;
+import hu.elte.inf.alkfejl.cinema.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.*;
 import java.util.List;
 
 import static hu.elte.inf.alkfejl.cinema.model.User.Role.ADMIN;
 import static hu.elte.inf.alkfejl.cinema.model.User.Role.USER;
 
 @RestController
-@RequestMapping("/api/movies")
-public class MovieController implements ControllerInterface<Movie>{
+@RequestMapping("/api/reservations")
+public class ReservationController implements ControllerInterface<Reservation> {
 
     @Autowired
-    private MovieService movieService;
+    private ReservationService reservationService;
 
     @Override
     @Role(ADMIN)
     @PutMapping("/update")
-    public void update(@RequestBody Movie movie) {
+    public void update(@RequestBody Reservation reservation) {
         try {
-            movieService.update(movie);
+            reservationService.update(reservation);
         } catch (DataNotValidException e) {
             e.printStackTrace();
         }
@@ -45,7 +40,7 @@ public class MovieController implements ControllerInterface<Movie>{
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Integer id) {
         try {
-            movieService.deleteById(id);
+            reservationService.deleteById(id);
         } catch (DataNotValidException e) {
             e.printStackTrace();
         } catch (MissingDataException e) {
@@ -56,9 +51,9 @@ public class MovieController implements ControllerInterface<Movie>{
     @Override
     @Role(ADMIN)
     @DeleteMapping("/delete")
-    public void delete(Movie movie) {
+    public void delete(Reservation reservation) {
         try {
-            movieService.delete(movie);
+            reservationService.delete(reservation);
         } catch (DataNotValidException e) {
             e.printStackTrace();
         }
@@ -68,9 +63,9 @@ public class MovieController implements ControllerInterface<Movie>{
     @Override
     @PostMapping("/create")
     @Role(ADMIN)
-    public void create(@RequestBody Movie movie) {
+    public void create(@RequestBody Reservation reservation) {
         try {
-            movieService.create(movie);
+            reservationService.create(reservation);
         } catch (DuplicatedDataException e) {
             e.printStackTrace();
         }
@@ -78,25 +73,14 @@ public class MovieController implements ControllerInterface<Movie>{
 
     @Role({ADMIN, USER})
     @GetMapping("/{id}")
-    public Movie get(@PathVariable Integer id) {
-        return movieService.get(id);
+    public Reservation get(@PathVariable Integer id) {
+        return reservationService.get(id);
     }
 
     @Role({ADMIN, USER})
     @GetMapping("/getall")
-    public List<Movie> getAll() {
-        return movieService.getAll();
-    }
-
-    @Role({ADMIN, USER})
-    @GetMapping("/getByActor/{actorId}")
-    public List<Movie> getByActor(@PathVariable Integer actorId) {
-        return movieService.getMoviesByActor(actorId);
-    }
-
-    @Role({ADMIN})
-    @PostMapping("/addActorToMovie/{movieId}")
-    public void addActorToMovie(@PathVariable Integer movieId, @RequestBody Actor actor) {
-        movieService.addActorToMovie(movieId, actor.getId());
+    public List<Reservation> getAll() {
+        return reservationService.getAll();
     }
 }
+

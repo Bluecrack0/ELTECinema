@@ -6,6 +6,7 @@ import hu.elte.inf.alkfejl.cinema.dao.ScreeningDao;
 import hu.elte.inf.alkfejl.cinema.exception.DataNotValidException;
 import hu.elte.inf.alkfejl.cinema.exception.DuplicatedDataException;
 import hu.elte.inf.alkfejl.cinema.exception.MissingDataException;
+import hu.elte.inf.alkfejl.cinema.exception.OverLapsException;
 import hu.elte.inf.alkfejl.cinema.model.Actor;
 import hu.elte.inf.alkfejl.cinema.model.CinemaRoom;
 import hu.elte.inf.alkfejl.cinema.model.Movie;
@@ -69,8 +70,8 @@ public class ScreeningController implements ControllerInterface<Screening>{
     @Role(ADMIN)
     public void create(@RequestBody Screening screening) {
         try {
-            screeningService.create(screening);
-        } catch (DuplicatedDataException e) {
+            screeningService.createScreening(screening);
+        } catch (DuplicatedDataException | OverLapsException e) {
             e.printStackTrace();
         }
     }

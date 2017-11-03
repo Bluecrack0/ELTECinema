@@ -37,4 +37,7 @@ public class DaoConfig {
     UserDao userDao() {
         return new UserDao(User.class, sessionFactory);
     }
+
+    @Bean
+    ReservationDao ReservationDao() { return new ReservationDao(Reservation.class, sessionFactory); }
 }
