@@ -1,10 +1,14 @@
 package hu.elte.inf.alkfejl.cinema.service;
 
+import hu.elte.inf.alkfejl.cinema.dao.ReservationDao;
 import hu.elte.inf.alkfejl.cinema.model.Reservation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Service
@@ -12,4 +16,14 @@ import org.springframework.web.context.annotation.SessionScope;
 @Data
 public class ReservationService extends AbstractService<Reservation> {
 
+    @Autowired
+    ReservationDao reservationDao;
+
+    public List<Reservation> getAllReservationsToUser(Integer userId) {
+        return reservationDao.getAllReservationToUser(userId);
+    }
+
+    public List<Reservation> getAllReservationsToScreening(Integer screeningId) {
+        return reservationDao.getAllReservationsToScreening(screeningId);
+    }
 }

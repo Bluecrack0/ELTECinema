@@ -10,6 +10,7 @@ import hu.elte.inf.alkfejl.cinema.exception.DuplicatedDataException;
 import hu.elte.inf.alkfejl.cinema.exception.OverLapsException;
 import hu.elte.inf.alkfejl.cinema.model.CinemaRoom;
 import hu.elte.inf.alkfejl.cinema.model.Movie;
+import hu.elte.inf.alkfejl.cinema.model.Reservation;
 import hu.elte.inf.alkfejl.cinema.model.Screening;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -77,5 +78,9 @@ public class ScreeningService extends AbstractService<Screening> {
 
     public List<Screening> getScreeningsByMovie(Movie movie) {
         return screeningDao.getScreeningsByMovie(movie);
+    }
+
+    public void addReservation(Integer id, Reservation reservation) {
+        screeningDao.addReservationToScreening(id, reservation);
     }
 }

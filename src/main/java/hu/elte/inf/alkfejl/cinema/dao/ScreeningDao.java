@@ -1,8 +1,6 @@
 package hu.elte.inf.alkfejl.cinema.dao;
 
-import hu.elte.inf.alkfejl.cinema.model.CinemaRoom;
-import hu.elte.inf.alkfejl.cinema.model.Movie;
-import hu.elte.inf.alkfejl.cinema.model.Screening;
+import hu.elte.inf.alkfejl.cinema.model.*;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
@@ -30,4 +28,11 @@ public class ScreeningDao extends GenericDaoImpl<Screening> {
         query.setParameter("movieId", movie.getId());
         return (List<Screening>) query.list();
     }
+
+    public void addReservationToScreening(Integer screeningId, Reservation reservation) {
+        Screening screening = findEntity(screeningId);
+        screening.getReservations().add(reservation);
+        updateEntity(screening);
+    }
+
 }

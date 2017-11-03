@@ -7,10 +7,7 @@ import hu.elte.inf.alkfejl.cinema.exception.DataNotValidException;
 import hu.elte.inf.alkfejl.cinema.exception.DuplicatedDataException;
 import hu.elte.inf.alkfejl.cinema.exception.MissingDataException;
 import hu.elte.inf.alkfejl.cinema.exception.OverLapsException;
-import hu.elte.inf.alkfejl.cinema.model.Actor;
-import hu.elte.inf.alkfejl.cinema.model.CinemaRoom;
-import hu.elte.inf.alkfejl.cinema.model.Movie;
-import hu.elte.inf.alkfejl.cinema.model.Screening;
+import hu.elte.inf.alkfejl.cinema.model.*;
 import hu.elte.inf.alkfejl.cinema.service.ScreeningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -105,5 +102,11 @@ public class ScreeningController implements ControllerInterface<Screening>{
     @GetMapping("/getAllByMovie")
     public List<Screening> getScreeningsByMovie(@RequestBody Movie movie) {
         return screeningService.getScreeningsByMovie(movie);
+    }
+
+    @PostMapping("/addReservation/{screeningId}")
+    @Role(ADMIN)
+    public void create(@PathVariable Integer screeningId, @RequestBody Reservation reservation) {
+        screeningService.addReservation(screeningId, reservation);
     }
 }

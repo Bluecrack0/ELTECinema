@@ -1,6 +1,7 @@
 package hu.elte.inf.alkfejl.cinema.dao;
 
 import hu.elte.inf.alkfejl.cinema.model.Actor;
+import hu.elte.inf.alkfejl.cinema.model.Reservation;
 import hu.elte.inf.alkfejl.cinema.model.User;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -25,5 +26,11 @@ public class UserDao extends GenericDaoImpl<User> {
         criteria.add(Restrictions.eq("password", password));
         Criteria executableCriteria = criteria.getExecutableCriteria(currentSession());
         return (User) executableCriteria.uniqueResult();
+    }
+
+    public void addReservationToUser(Integer userId, Reservation reservation) {
+        User user = findEntity(userId);
+        user.getReservationList().add(reservation);
+        updateEntity(user);
     }
 }

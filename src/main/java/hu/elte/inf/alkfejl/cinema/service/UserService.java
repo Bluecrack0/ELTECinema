@@ -2,6 +2,7 @@ package hu.elte.inf.alkfejl.cinema.service;
 
 import hu.elte.inf.alkfejl.cinema.dao.UserDao;
 import hu.elte.inf.alkfejl.cinema.exception.UserNotValidException;
+import hu.elte.inf.alkfejl.cinema.model.Reservation;
 import hu.elte.inf.alkfejl.cinema.model.User;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,4 +54,7 @@ public class UserService extends AbstractService<User> {
         return user;
     }
 
+    public void addReservation(Integer userId, Reservation reservation) {
+        userDao.addReservationToUser(userId, reservation);
+    }
 }

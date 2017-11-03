@@ -15,7 +15,7 @@ public class CinemaRoom implements ModelInterface {
     @Id
     @Column(name = "ROOM_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Getter @Setter private Integer id;
 
     @Column(name = "NAME", nullable = false)
     @Getter @Setter private String name;
@@ -27,15 +27,8 @@ public class CinemaRoom implements ModelInterface {
     @Getter @Setter private Integer columns;
 
     @OneToOne(mappedBy = "cinemaRoom")
+    @JoinColumn(name="ROOM_ID")
     @Getter @Setter private Screening screening;
 
-    @Override
-    public Integer getId() {
-        return null;
-    }
 
-    @Override
-    public void setId(Integer id) {
-
-    }
 }

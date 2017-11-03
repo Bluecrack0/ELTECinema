@@ -1,8 +1,10 @@
 package hu.elte.inf.alkfejl.cinema.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS")
@@ -29,6 +31,10 @@ public class User implements ModelInterface {
     @Column(name = "ROLE", nullable = false)
     @Getter @Setter private Role role;
 
+    @OneToMany(mappedBy = "owner")
+    @JsonIgnore
+    @Getter @Setter private List<Reservation> reservationList;
+
     @Override
     public Integer getId() {
         return this.id;
@@ -38,6 +44,7 @@ public class User implements ModelInterface {
     public void setId(Integer id) {
         this.id = id;
     }
+
 
     public enum Role {
         GUEST, USER, ADMIN

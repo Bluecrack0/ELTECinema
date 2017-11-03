@@ -1,6 +1,7 @@
 package hu.elte.inf.alkfejl.cinema.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table (name = "SCREENING")
@@ -24,10 +26,12 @@ public class Screening implements ModelInterface, Comparable<Screening> {
     @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "SCREENING_MOVIE", joinColumns = {
             @JoinColumn(name = "SCREENING_ID", nullable = false, updatable = false) })
+    @JsonIgnore
     @Getter @Setter private Movie movie;
 
     @OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinTable(name = "SCREENING_ROOM")
+    @JoinColumn(name="SCREENING_ID")
+    @JsonIgnore
     @Getter @Setter private CinemaRoom cinemaRoom;
 
     @Column(name = "START_TIME", nullable = false)
@@ -35,6 +39,10 @@ public class Screening implements ModelInterface, Comparable<Screening> {
 
     @Column(name = "END_TIME", nullable = false)
     @Getter @Setter private Date endTime;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "screening")
+    @Getter @Setter private List<Reservation> reservations;
 
     @Override
     public int compareTo(Screening otherScreening) {

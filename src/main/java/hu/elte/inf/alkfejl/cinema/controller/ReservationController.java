@@ -82,5 +82,20 @@ public class ReservationController implements ControllerInterface<Reservation> {
     public List<Reservation> getAll() {
         return reservationService.getAll();
     }
+
+    @Role({ADMIN, USER})
+    @GetMapping("/getAllToUser/{userId}")
+    public List<Reservation> getAllToUser(@PathVariable Integer userId) {
+
+        return reservationService.getAllReservationsToUser(userId);
+    }
+
+    @Role({ADMIN, USER})
+    @GetMapping("/getAllToScreening/{screeningId}")
+    public List<Reservation> getAllToScreening(@PathVariable Integer screeningId) {
+
+        return reservationService.getAllReservationsToScreening(screeningId);
+    }
+
 }
 
