@@ -9,6 +9,9 @@ import hu.elte.inf.alkfejl.cinema.model.Movie;
 import hu.elte.inf.alkfejl.cinema.model.Screening;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -41,5 +44,17 @@ public class MovieService extends AbstractService<Movie> {
     }
     public void addMovieToScreening(Integer movieId, Screening screening) {
         movieDao.addScreeningToMovie(movieId, screening);
+    }
+
+    public List<Movie> getByDirector(String director) {
+        return movieDao.getByDirector(director);
+    }
+
+    public List<Movie> getByDub(boolean dubbed) {
+        return movieDao.getByDub(dubbed);
+    }
+
+    public List<Movie> getByTitle(String title) {
+        return movieDao.getByTitle(title);
     }
 }

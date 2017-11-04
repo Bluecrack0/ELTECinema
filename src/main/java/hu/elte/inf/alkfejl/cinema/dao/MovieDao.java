@@ -36,4 +36,26 @@ public class MovieDao extends GenericDaoImpl<Movie> {
         movie.getScreenings().add(screening);
         updateEntity(movie);
     }
+
+    public List<Movie> getByDirector(String director) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(entityClass);
+        criteria.add(Restrictions.eq("director", director));
+        Criteria executableCriteria = criteria.getExecutableCriteria(currentSession());
+        return (List<Movie>) executableCriteria.list();
+    }
+
+    public List<Movie> getByDub(boolean dubbed) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(entityClass);
+        criteria.add(Restrictions.eq("dubbed", dubbed));
+        Criteria executableCriteria = criteria.getExecutableCriteria(currentSession());
+        return (List<Movie>) executableCriteria.list();
+    }
+
+    public List<Movie> getByTitle(String title) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(entityClass);
+        criteria.add(Restrictions.eq("title", title));
+        Criteria executableCriteria = criteria.getExecutableCriteria(currentSession());
+        return (List<Movie>) executableCriteria.list();
+    }
+
 }

@@ -105,4 +105,22 @@ public class MovieController implements ControllerInterface<Movie>{
     public void addActorToMovie(@PathVariable Integer movieId, @RequestBody Screening screening) {
         movieService.addMovieToScreening(movieId, screening);
     }
+
+    @Role({ADMIN, USER})
+    @GetMapping("/getByDirector/{director}")
+    public List<Movie> getByDirector(@PathVariable String director) {
+        return movieService.getByDirector(director);
+    }
+
+    @Role({ADMIN, USER})
+    @GetMapping("/getByDub/{dubbed}")
+    public List<Movie> getByDub(@PathVariable boolean dubbed) {
+        return movieService.getByDub(dubbed);
+    }
+
+    @Role({ADMIN, USER})
+    @GetMapping("/getByTitle/{title}")
+    public List<Movie> getByTitle(@PathVariable String title) {
+        return movieService.getByTitle(title);
+    }
 }
