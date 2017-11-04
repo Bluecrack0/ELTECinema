@@ -1,8 +1,10 @@
 package hu.elte.inf.alkfejl.cinema.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
@@ -10,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CinemaRoom implements ModelInterface {
+public class CinemaRoom implements ModelInterface, Serializable {
 
     @Id
     @Column(name = "ROOM_ID")
@@ -25,10 +27,5 @@ public class CinemaRoom implements ModelInterface {
 
     @Column(name = "COLUMNS", nullable = false)
     @Getter @Setter private Integer columns;
-
-    @OneToOne(mappedBy = "cinemaRoom")
-    @JoinColumn(name="ROOM_ID")
-    @Getter @Setter private Screening screening;
-
 
 }

@@ -23,9 +23,9 @@ public class ScreeningDao extends GenericDaoImpl<Screening> {
         updateEntity(screening);
     }
 
-    public List<Screening> getScreeningsByMovie(Movie movie) {
+    public List<Screening> getScreeningsByMovie(Integer movieId) {
         Query query = currentSession().createQuery("SELECT s FROM Movie m JOIN m.screenings s WHERE m.id = :movieId");
-        query.setParameter("movieId", movie.getId());
+        query.setParameter("movieId", movieId);
         return (List<Screening>) query.list();
     }
 

@@ -1,6 +1,7 @@
 package hu.elte.inf.alkfejl.cinema.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.ui.Model;
 
@@ -18,16 +19,14 @@ public class Reservation implements ModelInterface {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinTable(name = "USER_RESERVATIONS", joinColumns = {
-            @JoinColumn(name = "RESERVATION_ID", nullable = false, updatable = false) })
-    @JsonIgnore
+    @JoinColumn
+    @ManyToOne(targetEntity = User.class, optional = false)
+    @JsonIgnoreProperties("reservationList")
     @Getter @Setter private User owner;
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinTable(name = "SCREENING_RESERVATIONS", joinColumns = {
-            @JoinColumn(name = "RESERVATION_ID", nullable = false, updatable = false) })
-    @JsonIgnore
+    @JoinColumn
+    @ManyToOne(targetEntity = Screening.class, optional = false)
+    @JsonIgnoreProperties("reservations")
     @Getter @Setter private Screening screening;
 
     @Column(name = "ROW", nullable = false)

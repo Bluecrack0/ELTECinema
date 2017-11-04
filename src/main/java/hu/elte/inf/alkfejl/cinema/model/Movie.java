@@ -5,6 +5,8 @@ import hu.elte.inf.alkfejl.cinema.enums.AgeLimit;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "Movie")
@@ -12,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Movie implements ModelInterface {
+public class Movie implements ModelInterface, Serializable {
 
     @Id
     @Column(name = "MOVIE_ID")
@@ -43,8 +45,8 @@ public class Movie implements ModelInterface {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "ACTOR_MOVIE", joinColumns = {
-            @JoinColumn(name = "MOVIE_ID", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "ACTOR_ID",
+            @JoinColumn(name = "ACTOR_ID", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "MOVIE_ID",
                     nullable = false, updatable = false) })
     @JsonIgnore
     @Getter @Setter private List<Actor> actors;

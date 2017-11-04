@@ -31,6 +31,6 @@ public class UserDao extends GenericDaoImpl<User> {
     public void addReservationToUser(Integer userId, Reservation reservation) {
         User user = findEntity(userId);
         user.getReservationList().add(reservation);
-        updateEntity(user);
+        insertEntity(user);
     }
 }

@@ -99,4 +99,10 @@ public class MovieController implements ControllerInterface<Movie>{
     public void addActorToMovie(@PathVariable Integer movieId, @RequestBody Actor actor) {
         movieService.addActorToMovie(movieId, actor.getId());
     }
+
+    @Role({ADMIN})
+    @PostMapping("/addMovieToScreening/{movieId}")
+    public void addActorToMovie(@PathVariable Integer movieId, @RequestBody Screening screening) {
+        movieService.addMovieToScreening(movieId, screening);
+    }
 }

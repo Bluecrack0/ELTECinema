@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User implements ModelInterface {
+public class User implements ModelInterface, Serializable {
 
     @Id
     @Column(name = "USER_ID")
@@ -31,8 +33,7 @@ public class User implements ModelInterface {
     @Column(name = "ROLE", nullable = false)
     @Getter @Setter private Role role;
 
-    @OneToMany(mappedBy = "owner")
-    @JsonIgnore
+    @OneToMany(targetEntity = Reservation.class, mappedBy = "owner")
     @Getter @Setter private List<Reservation> reservationList;
 
     @Override
@@ -48,16 +49,5 @@ public class User implements ModelInterface {
 
     public enum Role {
         GUEST, USER, ADMIN
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", username='" + username + '\'' +
-                ", role=" + role + '\'' +
-                '}';
     }
 }

@@ -2,12 +2,15 @@ package hu.elte.inf.alkfejl.cinema.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,22 +19,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Screening implements ModelInterface, Comparable<Screening> {
+public class Screening implements ModelInterface, Comparable<Screening>, Serializable {
 
     @Id
     @Column(name = "SCREENING_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private Integer id;
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinTable(name = "SCREENING_MOVIE", joinColumns = {
-            @JoinColumn(name = "SCREENING_ID", nullable = false, updatable = false) })
-    @JsonIgnore
+    @JoinColumn
+    @ManyToOne(targetEntity = Movie.class, optional = false)
+    @JsonIgnoreProperties("screenings")
     @Getter @Setter private Movie movie;
 
-    @OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name="SCREENING_ID")
-    @JsonIgnore
+    @OneToOne (cascade=CascadeType.ALL)
+    @JoinColumn(name="ROOM_ID", unique= true, nullable=true, insertable=true, updatable=true)
     @Getter @Setter private CinemaRoom cinemaRoom;
 
     @Column(name = "START_TIME", nullable = false)
@@ -40,8 +41,8 @@ public class Screening implements ModelInterface, Comparable<Screening> {
     @Column(name = "END_TIME", nullable = false)
     @Getter @Setter private Date endTime;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "screening")
+    @JsonIgnore
     @Getter @Setter private List<Reservation> reservations;
 
     @Override

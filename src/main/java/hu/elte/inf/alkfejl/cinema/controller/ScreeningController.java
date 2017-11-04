@@ -99,9 +99,9 @@ public class ScreeningController implements ControllerInterface<Screening>{
     }
 
     @Role({ADMIN, USER})
-    @GetMapping("/getAllByMovie")
-    public List<Screening> getScreeningsByMovie(@RequestBody Movie movie) {
-        return screeningService.getScreeningsByMovie(movie);
+    @GetMapping("/getAllByMovie/{movieId}")
+    public List<Screening> getScreeningsByMovie(@PathVariable Integer movieId) {
+        return screeningService.getScreeningsByMovie(movieId);
     }
 
     @PostMapping("/addReservation/{screeningId}")

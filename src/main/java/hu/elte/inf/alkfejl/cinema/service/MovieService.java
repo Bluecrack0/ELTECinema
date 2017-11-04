@@ -6,6 +6,7 @@ import hu.elte.inf.alkfejl.cinema.dao.ActorDao;
 import hu.elte.inf.alkfejl.cinema.dao.MovieDao;
 import hu.elte.inf.alkfejl.cinema.model.Actor;
 import hu.elte.inf.alkfejl.cinema.model.Movie;
+import hu.elte.inf.alkfejl.cinema.model.Screening;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,8 @@ public class MovieService extends AbstractService<Movie> {
 
     public void addActorToMovie(Integer id, Integer actorid) {
         movieDao.addActorToMovie(id, actorDao.findEntity(actorid));
+    }
+    public void addMovieToScreening(Integer movieId, Screening screening) {
+        movieDao.addScreeningToMovie(movieId, screening);
     }
 }

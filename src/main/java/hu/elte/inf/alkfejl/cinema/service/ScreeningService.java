@@ -76,8 +76,8 @@ public class ScreeningService extends AbstractService<Screening> {
         screeningDao.updateCinemaRoom(id, cinemaRoom);
     }
 
-    public List<Screening> getScreeningsByMovie(Movie movie) {
-        return screeningDao.getScreeningsByMovie(movie);
+    public List<Screening> getScreeningsByMovie(Integer movieId) {
+        return screeningDao.getScreeningsByMovie(movieId);
     }
 
     public void addReservation(Integer id, Reservation reservation) {
