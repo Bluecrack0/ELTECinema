@@ -34,6 +34,7 @@ public class User implements ModelInterface, Serializable {
     @Getter @Setter private Role role;
 
     @OneToMany(targetEntity = Reservation.class, mappedBy = "owner")
+    @JsonIgnore
     @Getter @Setter private List<Reservation> reservationList;
 
     @Override
