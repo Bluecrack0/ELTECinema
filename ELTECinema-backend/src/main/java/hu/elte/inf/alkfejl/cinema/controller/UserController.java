@@ -9,6 +9,9 @@ import hu.elte.inf.alkfejl.cinema.exception.MissingDataException;
 import hu.elte.inf.alkfejl.cinema.exception.UserNotValidException;
 import hu.elte.inf.alkfejl.cinema.model.*;
 import hu.elte.inf.alkfejl.cinema.service.UserService;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +21,15 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Properties;
+import java.util.UUID;
 
 import static hu.elte.inf.alkfejl.cinema.model.User.Role.ADMIN;
 import static hu.elte.inf.alkfejl.cinema.model.User.Role.GUEST;
 import static hu.elte.inf.alkfejl.cinema.model.User.Role.USER;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.mail.Session;
 
 @RestController
 @RequestMapping("/user/")
@@ -37,7 +45,7 @@ public class UserController implements ControllerInterface<User> {
 
     @Override
     @Role(ADMIN)
-    @PutMapping("/update")
+    @PostMapping("/update")
     public void update(@RequestBody User user) {
         try {
             userService.update(user);
@@ -99,14 +107,13 @@ public class UserController implements ControllerInterface<User> {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute User user, Model model) {
+    public User login(@ModelAttribute User user, Model model) {
         try {
-            userService.login(user);
-            return "\""+ redirectToGreeting(user) + "\"";
+            return userService.login(user);
         }
         catch (UserNotValidException e) {
             model.addAttribute("error", true);
-            return "\"login\"";
+            return null;
         }
     }
 
@@ -124,8 +131,6 @@ public class UserController implements ControllerInterface<User> {
     }
 */
 
-
-
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
@@ -133,10 +138,13 @@ public class UserController implements ControllerInterface<User> {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
+    public User register(@ModelAttribute User user) {
         user.setRole(USER);
-        userService.register(user);
-        return "\"login\"";
+        User retUser = userService.register(user);
+        if (retUser == null) {
+            assert false;
+        }
+        return retUser;
     }
 
     private String redirectToGreeting(@ModelAttribute User user) {
@@ -170,5 +178,24 @@ public class UserController implements ControllerInterface<User> {
     @Role(USER)
     public String getCurrentUser() {
         return userService.getLoggedInUserName();
+    }
+
+    @GetMapping("/updateUserData")
+    @Role(USER)
+    public String updateData(@RequestParam(value = "username") String username,
+                             @RequestParam(value = "fullName") String fullName,
+                             @RequestParam(value = "address") String address,
+                             @RequestParam(value = "phoneNumber") String phoneNumber,
+                             @RequestParam(value = "email") String email,
+                             @RequestParam(value = "age") Integer age) {
+        userService.updateUserData(username, fullName, email,address, age, phoneNumber);
+        return "\""+"updated"+"\"";
+    }
+
+    @GetMapping("/generateConfCode")
+    @Role(USER)
+    public String generateAndSendConfirmationCode(@RequestParam(value = "mail") String semail) throws EmailException {
+        String code = UUID.randomUUID().toString();
+        return "{\"code\":\""+code+"\"}";
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @SessionScope
@@ -42,13 +43,15 @@ public class UserService extends AbstractService<User> {
         }
     }
 
-    public void register(User user) {
+    public User register(User user) {
         userDao.insertEntity(user);
-        this.user = userDao.findByUsername(user.getUsername());
+        return this.user = userDao.findByUsername(user.getUsername());
     }
 
     public boolean isValid(User user) {
-        return userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword()) != null;
+        User foundUser = userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+        return foundUser != null &&
+                Objects.equals(foundUser.getEmail(), user.getEmail());
     }
 
     public boolean isLoggedIn() {
@@ -65,5 +68,10 @@ public class UserService extends AbstractService<User> {
 
     public void addReservation(Integer userId, Reservation reservation) {
         userDao.addReservationToUser(userId, reservation);
+    }
+
+    public void updateUserData(String userName, String name, String email, String address, int age, String phoneNum) {
+        userDao.updateUserData(userName, name, email, address, age, phoneNum);
+        this.user = userDao.findByUsername(userName);
     }
 }

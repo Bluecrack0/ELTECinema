@@ -28,7 +28,7 @@ public class DatabaseConfig  {
     LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setAnnotatedClasses(Movie.class, CinemaRoom.class, Screening.class, Actor.class, User.class, Reservation.class, News.class);
+        factoryBean.setAnnotatedClasses(Movie.class, CinemaRoom.class, Screening.class, Actor.class, ConfirmationCode.class, User.class, Reservation.class, News.class);
         Properties hibernateProperties = hibernateProperties();
         factoryBean.setHibernateProperties(hibernateProperties);
         return factoryBean;

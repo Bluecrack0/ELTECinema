@@ -18,13 +18,30 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
     }
 
+    userFromJson(json) {
+      return {
+          id: json['id'],
+          email: json['email'],
+          password: json['password'],
+          username: json['username'],
+          role: json['role'],
+          fullName: json['fullName'],
+          phoneNumber: json['phoneNumber'],
+          age: json['age'],
+          address: json['address']
+      }
+    }
     title = 'login';
-    user: User = {
+      user: User = {
       id: 0,
-      email: "asd@asd.com",
+      email: "",
       password: "",
       username: "",
-      role: "USER"
+      role: "",
+      fullName: "",
+      phoneNumber: "",
+      age: 0,
+      address: ""
     };
 
     constructor(
@@ -34,7 +51,6 @@ export class LoginComponent implements OnInit {
       console.log(this.cinemaBackendService.isLoggedIn);
     }
 
-
     login() {
         if (this.cinemaBackendService.isLoggedIn) {
           this.router.navigate(['/screenings']);
@@ -42,13 +58,14 @@ export class LoginComponent implements OnInit {
 
         this.cinemaBackendService.login(this.user).subscribe(response => {
             console.log(response);
-            if (response != "login") { //;sikerült bejelentkezni
+            if (response != null) { //;sikerült bejelentkezni
+                console.log(response);
                 this.cinemaBackendService.isLoggedIn = true;
-                this.cinemaBackendService.user = this.user;
+                this.cinemaBackendService.user = this.userFromJson(response);
                 this.router.navigate(['/screenings']);
             }
             else {
-                alert("Hibás felhasználónév vagy jelszó!");
+                alert("Hibás felhasználónév/email vagy jelszó!");
             }
         }, err => {
         });

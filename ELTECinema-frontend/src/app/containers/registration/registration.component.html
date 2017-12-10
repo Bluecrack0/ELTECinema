@@ -1,11 +1,11 @@
-<div class="panel panel-default login-container">
+<div *ngIf="regSuccessful == false" class="panel panel-default login-container">
         <div class="panel-heading">
             Register
         </div>
         <div class="panel-body">
             <form (submit)="register()">
                 <label>Username</label>
-                <input type="text" name="name" [(ngModel)]="user.username" class="form-control">
+                <input type="text" name="name" ngModel email="true" [(ngModel)]="user.username" class="form-control">
                 <label>Email</label>
                 <input type="email" name="email" [(ngModel)]="user.email" class="form-control">
                 <label>Password</label>
@@ -18,4 +18,12 @@
                 </div>
             </form>
         </div>
-    </div>
+</div>
+<div *ngIf="regSuccessful == true" class="panel panel-default login-container">
+  <div class="panel-heading">
+    <p>You successfully registered! We are sending you an e-mail with a confirmation code.</p><br/>
+    <p>Enter your code below:</p>
+    <input type="text" name="name" [(ngModel)]="pwConf" class="form-control">
+    <button type="submit" (click)=checkCode() class="btn btn-primary">Register</button>
+  </div>
+</div>

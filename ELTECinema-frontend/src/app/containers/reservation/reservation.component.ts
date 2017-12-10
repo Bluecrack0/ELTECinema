@@ -28,11 +28,18 @@ export class ReservationComponent implements OnInit, OnDestroy {
     startTime: string;
     endTime: string;
 
+    missingDetails: boolean = false;
 
     constructor(private route: ActivatedRoute, private cinemaBackendService: CinemaBackendService, private router: Router) {
       if (!this.cinemaBackendService.isLoggedIn) {
         alert("You are not logged in so you can't see the screenings!");
         this.router.navigate(['/login']);
+      } else {
+        if (this.cinemaBackendService.user.address === ""
+        || this.cinemaBackendService.user.phoneNumber === ""
+        || this.cinemaBackendService.user.fullName === "") {
+          this.missingDetails = true;
+        }
       }
     }
 

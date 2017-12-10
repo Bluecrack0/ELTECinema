@@ -33,5 +33,8 @@ export class AppComponent {
     this.router.navigate(['']);
   }
 
+  accountDetails() {
+    this.router.navigate(['/accountDetails'])
+  }
 
 }

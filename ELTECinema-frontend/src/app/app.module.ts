@@ -14,6 +14,7 @@ import { CinemaBackendService } from './services/cinemaBackend.service';
 
 import { AgeLimitPipe } from './pipes/ageLimit.pipe'
 import {HomeComponent} from "./containers/home/home.component";
+import {UserDetailsComponent} from "./containers/userdetails/userdetails.component";
 
 const routes: Routes = [
     {
@@ -35,6 +36,10 @@ const routes: Routes = [
     {
         path: 'screenings',
         component: ScreeningsComponent
+    },
+    {
+      path: 'accountDetails',
+      component: UserDetailsComponent
     }
 ];
 
@@ -46,7 +51,8 @@ const routes: Routes = [
         ScreeningsComponent,
         AgeLimitPipe,
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        UserDetailsComponent
     ],
     imports: [
         BrowserModule,

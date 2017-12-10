@@ -19,7 +19,11 @@ export class CinemaBackendService {
       username: "Ismeretlen",
       password: "",
       email: "",
-      role: "GUEST"
+      role: "",
+      fullName: "",
+      phoneNumber: "",
+      age: -1,
+      address: ""
     };
     redirectUrl: string;
 
@@ -36,10 +40,18 @@ export class CinemaBackendService {
         return this.getNoParam<string>(BASE_URL + 'user/getCurrentUser');
     }
 
+    getConfirmationCode(email) {
+      return this.getNoParam<string>(BASE_URL + '/user/generateConfCode?mail='+email);
+    }
+    updateUser() {
+        console.log(this.user);
+        return this.get<string>(BASE_URL + 'user/updateUserData', this.user);
+    }
+
     login(user: User) {
         localStorage.setItem('isAdminValue', (user.username == "admin") ? "1" : "0");
         this.get<string>(BASE_URL + 'user/login', user);
-        return this.post<string>(BASE_URL + 'user/login', user);
+        return this.post<User>(BASE_URL + 'user/login', user);
     }
 
     logout(user: User) {
@@ -82,16 +94,18 @@ export class CinemaBackendService {
     getAllReservation() {
         return this.http.get<Reservation[]>(BASE_URL + 'api/reservations/getall');
     }
-
     get<TResponse>(action: string, params: any) {
         let url = action + '?' + Object.keys(params).map(key => key + '=' + params[key]).join('&');
         return this.http.get<TResponse>(url);
     }
 
     getNoParam<TResponse>(action: string) {
-      return this.http.get<TResponse>(action);
+        return this.http.get<TResponse>(action);
     }
 
+    postNoParam(action: string, params: any) {
+        return this.post(action, params);
+    }
     post<TResponse>(action: string, params: any) {
         let url = action + '?' + Object.keys(params).map(key => key + '=' + params[key]).join('&');
         return this.http.post<TResponse>(url, {});

@@ -33,6 +33,18 @@ public class User implements ModelInterface, Serializable {
     @Column(name = "ROLE", nullable = false)
     @Getter @Setter private Role role;
 
+    @Column(name = "FULL_NAME", nullable = true)
+    @Getter @Setter private String fullName;
+
+    @Column(name = "ADDRESS", nullable = true)
+    @Getter @Setter private String address;
+
+    @Column(name = "PHONE_NUMBER", nullable = true)
+    @Getter @Setter private String phoneNumber;
+
+    @Column(name = "AGE", columnDefinition = "int default 0")
+    @Getter @Setter private int age;
+
     @OneToMany(targetEntity = Reservation.class, mappedBy = "owner")
     @JsonIgnore
     @Getter @Setter private List<Reservation> reservationList;

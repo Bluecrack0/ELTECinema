@@ -5,12 +5,17 @@ import hu.elte.inf.alkfejl.cinema.model.News;
 import hu.elte.inf.alkfejl.cinema.model.Reservation;
 import hu.elte.inf.alkfejl.cinema.model.User;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
+import java.util.UUID;
 
 public class UserDao extends GenericDaoImpl<User> {
+
     public UserDao(Class<User> userClass, SessionFactory sessionFactor) {
         super(userClass, sessionFactor);
     }
@@ -30,6 +35,24 @@ public class UserDao extends GenericDaoImpl<User> {
         return (User) executableCriteria.uniqueResult();
     }
 
+    public void updateUserData(String userName, String name, String email, String address, int age, String phoneNum) {
+        User user = findByUsername(userName);
+        if (name != null && !name.isEmpty()) {
+            user.setFullName(name);
+        }
+        if (email != null && !email.isEmpty()) {
+            user.setEmail(email);
+        }
+        if (address != null && !address.isEmpty()) {
+            user.setAddress(address);
+        }
+        if (phoneNum != null && !phoneNum.isEmpty()) {
+            user.setPhoneNumber(phoneNum);
+        }
+        deleteEntity(user);
+        insertEntity(user);
+        System.out.println(user.getFullName());
+    }
     public void addReservationToUser(Integer userId, Reservation reservation) {
         User user = findEntity(userId);
         user.getReservationList().add(reservation);

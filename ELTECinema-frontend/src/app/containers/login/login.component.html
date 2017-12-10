@@ -7,10 +7,11 @@
     <div class="panel-heading">
         Login
     </div>
-
   <div *ngIf="cinemaBackendService.isLoggedIn == false">
     <div class="panel-body">
       <form (submit)="login()">
+            <label>Email</label>
+            <input type="email" name="name" [(ngModel)]="user.email" class="form-control">
             <label>Username</label>
             <input type="text" name="name" [(ngModel)]="user.username" class="form-control">
             <label>Password</label>
