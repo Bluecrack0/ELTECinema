@@ -1,0 +1,48 @@
+body
+{
+  padding: 20px;
+}
+
+.frontpagearticlefigure img
+{
+  height: 140px;
+  width: 250px;
+  background: #ccc;
+  display: block;
+}
+
+.frontpagearticle
+{
+  float: left;
+}
+
+.frontpagearticlemain
+{
+  float: left;
+  margin-left: 30px;
+  width: 300px;
+}
+
+header
+{
+  white-space: nowrap;
+}
+
+header h2
+{
+  font-size: 38px;
+}
+
+time
+{
+  float: right;
+  position: relative;
+  top: -30px;
+}
+
+.frontpagearticletext
+{
+  width: 300px;
+  display: block;
+  margin-top: 20px;
+}
