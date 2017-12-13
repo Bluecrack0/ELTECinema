@@ -26,4 +26,9 @@ public class News implements ModelInterface {
     @Column(name = "PUBTIME", nullable = false)
     @Getter @Setter private String pubtime;
 
+    public News(String title, String article, String pubtime) {
+        this.title = title;
+        this.article = article;
+        this.pubtime = pubtime;
+    }
 }

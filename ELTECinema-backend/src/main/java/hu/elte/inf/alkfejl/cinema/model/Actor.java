@@ -40,4 +40,12 @@ public class Actor implements ModelInterface {
                     nullable = false, updatable = false) })
     @JsonIgnore
     @Getter @Setter private List<Movie> movies;
+
+
+    public Actor(String name, String sex, Integer age, String bio) {
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+        this.bio = bio;
+    }
 }

@@ -34,4 +34,9 @@ public class Reservation implements ModelInterface {
 
     @Column(name = "COL", nullable = false)
     @Getter @Setter private Integer col;
+
+    public Reservation(Integer row, Integer col) {
+        this.row = row;
+        this.col = col;
+    }
 }

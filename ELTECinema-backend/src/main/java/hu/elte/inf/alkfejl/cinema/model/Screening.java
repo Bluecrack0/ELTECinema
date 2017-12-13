@@ -53,4 +53,10 @@ public class Screening implements ModelInterface, Comparable<Screening>, Seriali
     public boolean screeningOverLapsWith(Screening otherScreening) {
         return this.compareTo(otherScreening) >= 1;
     }
+
+    public Screening(Movie movie, Date startTime, Date endTime) {
+        this.movie = movie;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 }

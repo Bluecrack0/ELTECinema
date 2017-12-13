@@ -28,4 +28,9 @@ public class CinemaRoom implements ModelInterface, Serializable {
     @Column(name = "COLUMNS", nullable = false)
     @Getter @Setter private Integer columns;
 
+    public CinemaRoom(String name, Integer rows, Integer columns) {
+        this.name = name;
+        this.rows = rows;
+        this.columns = columns;
+    }
 }

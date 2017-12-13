@@ -4,8 +4,6 @@ import hu.elte.inf.alkfejl.cinema.dao.DaoInterface;
 import hu.elte.inf.alkfejl.cinema.exception.DataNotValidException;
 import hu.elte.inf.alkfejl.cinema.exception.DuplicatedDataException;
 import hu.elte.inf.alkfejl.cinema.exception.MissingDataException;
-import hu.elte.inf.alkfejl.cinema.model.Actor;
-import hu.elte.inf.alkfejl.cinema.model.CinemaRoom;
 import hu.elte.inf.alkfejl.cinema.model.ModelInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,9 +14,10 @@ public abstract class AbstractService<Entity extends ModelInterface> {
     @Autowired
     DaoInterface<Entity> dao;
 
-    protected boolean exist(Entity entity) {
+    public boolean notExist(Entity entity) {
         return dao.findEntity(entity.getId()) == null;
     }
+    public boolean exist(Entity entity) { return dao.findEntity(entity.getId()) != null; }
 
     public void update(Entity entity) throws DataNotValidException {
         if (exist(entity)) {
@@ -45,7 +44,7 @@ public abstract class AbstractService<Entity extends ModelInterface> {
     }
 
     public void create(Entity entity) throws DuplicatedDataException {
-        if (exist(entity)) {
+        if (notExist(entity)) {
             dao.insertEntity(entity);
         } else {
             throw new DuplicatedDataException();

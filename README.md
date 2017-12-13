@@ -88,3 +88,47 @@ Hibás felhasználónév vagy jelszó esetén hibaüzenettel értesíti a felhasználót.
 
 6. __Foglalás/Vásárlás visszavonása:__ A felhasználó a foglalást/vásárlást követo __4 órán túl__ meggondolja magát.
 Ebben az esetben a rendszer hibaüzenettel jelzi, hogy sajnos már nincs lehetoség a foglalás/vásárlás lemondására.
+
+## Tesztelés 
+
+A projekt során minden dao/service/controller és model osztály is tesztelésre kerül.
+Az átfogó teszt osztály az ApplicationTests és külön packagekben találhatóak meg a tesztek.
+
+### DAO
+dao package: DaoTest
+1. actorDaoTest
+2. newsDaoTest
+3. movieDaoTest
+4. screeningDaoTest
+5. userDaoTest
+6. actorDaoTest
+7. reservationDaoTest
+
+Ezek a tesztek az adatbáziskezelést próbálják tesztelni.
+Legfobb céljuk, hogy az alapveto (insert, update etc.) muveletek hiba (Exception, vagy barmilyen adatmodositasi hiba) nélkül menjenek vegbe.
+
+A fobb tesztek a null test, result set mérete, exception test (assert false).
+
+Természetesen a kapcsolatok (OneToMany, ManyToOne etc.) is tesztelésre kerülnek. Legtöbbször itt ConstraintViolationException-t vár el a teszt, mikor megpróbáljuk törölni a kapcsolat egyik elemét például.
+
+Bár a DAO-k megvalósítása egy közös GenericDaoImpl osztállyal történik, ettol függetlenül mindegyik modell dao-ja tesztelésre került részletesen.
+
+### Service
+service package: ServiceTest
+1. actorServiceTest
+2. newsServiceTest
+3. movieServiceTest
+4. screeningServiceTest
+5. userServiceTest
+6. actorServiceTest
+7. reservationServiceTest
+
+A service tesztek az üzleti logikát tesztelik.
+
+Úgy mint a DAO-k esetében itt is egy közös ososztallyal történt a servicek megvalósítása. (AbstractService)
+Ettol függetlenül természetesen minden modellhez tartozó service osztály külön tesztelésre került.
+
+### Controller
+
+
+### Model

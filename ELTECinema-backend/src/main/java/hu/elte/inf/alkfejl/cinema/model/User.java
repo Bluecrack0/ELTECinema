@@ -63,4 +63,15 @@ public class User implements ModelInterface, Serializable {
     public enum Role {
         GUEST, USER, ADMIN
     }
+
+    public User(String username, String email, String password, Role role, String fullName, String address, String phoneNumber, int age) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.fullName = fullName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.age = age;
+    }
 }

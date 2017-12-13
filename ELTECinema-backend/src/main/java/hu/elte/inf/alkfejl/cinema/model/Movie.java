@@ -55,4 +55,13 @@ public class Movie implements ModelInterface, Serializable {
     @OneToMany(mappedBy = "movie")
     @Getter @Setter private List<Screening> screenings;
 
+    public Movie(String title, Boolean dubbed, String director, String story, Integer length, AgeLimit ageLimit, Integer ticketSold) {
+        this.title = title;
+        this.dubbed = dubbed;
+        this.director = director;
+        this.story = story;
+        this.length = length;
+        this.ageLimit = ageLimit;
+        this.ticketSold = ticketSold;
+    }
 }

@@ -41,14 +41,16 @@ public class GenericDaoImpl<Entity extends ModelInterface> extends HibernateDaoS
     }
 
     @Override
-    public void insertEntity(Entity entity) {
+    public boolean insertEntity(Entity entity) {
 
         try {
             currentSession().persist(entity);
             currentSession().flush();
+            return true;
         }
         catch(Exception e) {
             e.printStackTrace();
+            return false;
         }
 
     }
