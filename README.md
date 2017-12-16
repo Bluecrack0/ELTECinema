@@ -130,5 +130,28 @@ Ettol függetlenül természetesen minden modellhez tartozó service osztály külön t
 
 ### Controller
 
+controller package: ControllerTest
+1. actorControllerTest
+2. movieControllerTest
+3. screeningControllerTest
+4. reservationControllerTest
+5. userControllerTest
+
+
+A kontroller tesztek elkészítése során a legfontosabb, hogy a megfelelo végpontok lekérdezésekor 200-as responset kapjunk.
+Fontos, hogy semmiképp se 404, vagy egyéb hibát az alatta lévo layerek miatt.
+A tesztek hibátlanul lefutottak és legtöbb esetben az egyedi funkciók is tesztelésre kerültek.
+
+A NewsController tesztelésére nem került sor, mivel egy az egyben a GenericService ososztalyt használja, 
+amely tesztelésre került az összes többi teszteset során.
 
 ### Model
+A modellek tesztelésére nem készült külön tesztosztály, mivel a modellek összes funkciója tesztelésre kerül a fenti tesztek során
+egyfajta integrációs teszt formályában.
+
+### Összegzés
+A back-end tesztelése a Unit és integrációs tesztelések kombinációjából született meg.
+Minden tesztosztály tranzakcionális, vagyis visszaállítja az adatbázist konzisztens állapotba a teszt végeztével.
+Az integrációs teszt legfontosabb részét ezzel lefedtük.
+A tesztek nagyrészt az import.sql dummy adatok betöltésére támaszkodnak és ezeket az adatokat próbálják vizsgálni.
+Természetesen a tesztek során gyakran elofordul, hogy új adatok kerülnek betöltésre, de a tranzakció lejártával ezek törlodnek.

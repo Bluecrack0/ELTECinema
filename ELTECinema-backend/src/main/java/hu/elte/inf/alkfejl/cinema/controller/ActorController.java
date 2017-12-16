@@ -28,7 +28,7 @@ public class ActorController implements ControllerInterface<Actor> {
 
     @Override
     @Role(ADMIN)
-    @PutMapping("/update")
+    @PostMapping("/update")
     public void update(@RequestBody Actor actor) {
 
         try {

@@ -57,7 +57,7 @@ public class ServiceTest {
             assert false;
         }
 
-        Actor actor1 = actorService.get(2);
+        Actor actor1 = actorService.get(1);
 
         Assert.assertNotNull(actor1);
 
@@ -72,9 +72,7 @@ public class ServiceTest {
             assert false;
         }
 
-        actor.setName("UPDATED");
-
-        Actor actor2 = actorService.get(1);
+        Actor actor2 = actorService.get(0);
         actor2.setName("UPDATED");
         
         try {

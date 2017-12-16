@@ -3,6 +3,7 @@ package hu.elte.inf.alkfejl.cinema;
 import hu.elte.inf.alkfejl.cinema.config.DaoConfigTest;
 import hu.elte.inf.alkfejl.cinema.config.DatabaseConfigTest;
 import hu.elte.inf.alkfejl.cinema.config.TestApplicationContext;
+import hu.elte.inf.alkfejl.cinema.controller.*;
 import hu.elte.inf.alkfejl.cinema.dao.*;
 import hu.elte.inf.alkfejl.cinema.enums.AgeLimit;
 import hu.elte.inf.alkfejl.cinema.model.*;
@@ -56,6 +57,21 @@ public class ApplicationTests {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ActorController actorController;
+    @Autowired
+    CinemaRoomController cinemaRoomController;
+    @Autowired
+    MovieController movieController;
+    @Autowired
+    NewsController newsController;
+    @Autowired
+    ReservationController reservationController;
+    @Autowired
+    ScreeningController screeningController;
+    @Autowired
+    UserController userController;
+
     @Test
 	public void contextLoads() {
 		DaoConfigTest daoConfigTest = new DaoConfigTest();
@@ -71,5 +87,10 @@ public class ApplicationTests {
     @Test
     public void serviceTests() {
         new ServiceTest(actorService, cinemaRoomService, movieService, newsService, reservationService, screeningService, userService).serviceTests();
+    }
+
+    @Test
+    public void controllerTests() throws Exception {
+        new ControllerTest(actorController, cinemaRoomController, movieController, newsController, reservationController, screeningController, userController).controllerTests();
     }
 }
