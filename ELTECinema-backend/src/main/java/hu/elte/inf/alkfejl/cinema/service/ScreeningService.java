@@ -41,7 +41,7 @@ public class ScreeningService extends AbstractService<Screening> {
     }
 
     public void createScreening(Screening screening) throws DuplicatedDataException, OverLapsException {
-        if (!notExist(screening)) {
+        if (notExist(screening)) {
             if (!overlapsWithAny(screening)) {
                 screeningDao.insertEntity(screening);
             } else {

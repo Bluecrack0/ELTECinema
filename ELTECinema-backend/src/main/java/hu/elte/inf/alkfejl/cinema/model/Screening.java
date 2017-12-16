@@ -27,12 +27,12 @@ public class Screening implements ModelInterface, Comparable<Screening>, Seriali
     @Getter @Setter private Integer id;
 
     @JoinColumn
-    @ManyToOne(targetEntity = Movie.class, optional = false)
+    @ManyToOne(targetEntity = Movie.class, optional = true)
     @JsonIgnoreProperties("screenings")
     @Getter @Setter private Movie movie;
 
-    @OneToOne (cascade=CascadeType.ALL)
-    @JoinColumn(name="ROOM_ID", unique= true, nullable=true, insertable=true, updatable=true)
+    @ManyToOne(cascade=CascadeType.MERGE)
+    @JoinColumn(name="ROOM_ID", unique= false, nullable=true, insertable=true, updatable=true)
     @Getter @Setter private CinemaRoom cinemaRoom;
 
     @Column(name = "START_TIME", nullable = false)

@@ -44,10 +44,11 @@ public abstract class AbstractService<Entity extends ModelInterface> {
     }
 
     public void create(Entity entity) throws DuplicatedDataException {
+
         if (notExist(entity)) {
             dao.insertEntity(entity);
         } else {
-            throw new DuplicatedDataException();
+            throw new DuplicatedDataException("ID not valid: " + entity.getId());
         }
     }
 
