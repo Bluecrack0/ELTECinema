@@ -1,3 +1,4 @@
+<div class="dark-panel">
 <div *ngIf="missingDetails == false">
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -20,8 +21,8 @@
         </td>
     </tr>
 </table>
-<h4 *ngIf="isAdmin" class="h4-admin-functions">Admin functions</h4>
-<div *ngIf="isAdmin" class="panel panel-default panel-adding">
+<h4 *ngIf="isAdmin && selectedScreening" class="h4-admin-functions">Admin functions</h4>
+<div *ngIf="isAdmin && selectedScreening" class="panel panel-default panel-adding">
     <div class="panel-heading">
         Create a new screening
     </div>
@@ -49,4 +50,5 @@
 <div *ngIf="missingDetails == true">
   <h1>Sorry, but some of your details are missing (Phone Number etc.)</h1>
   <h2>Please go into account details and change your details before making a reservation!</h2>
+</div>
 </div>

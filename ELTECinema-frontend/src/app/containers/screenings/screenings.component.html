@@ -1,5 +1,7 @@
-<h4>Movies</h4>
+<div class="dark-panel">
+<h4 class="s-title">Movies</h4>
 <div class="panel panel-default">
+	
     <div class="panel-heading">
         <label>Filter movies:</label>
         <input type="text" [(ngModel)]="titleFilter" (input)="filterChanged()" class="form-control filter-control">
@@ -22,7 +24,11 @@
             <td>{{movie.length}} min.</td>
         </tr>
     </table>
+	</div>
 </div>
+
+<div class="dark-panel">
+
 <h4 *ngIf="isAdmin" class="h4-admin-functions">Admin functions</h4>
 <div *ngIf="isAdmin" class="panel panel-default panel-adding"> 
     <div class="panel-heading">
@@ -66,4 +72,5 @@
             <button (click)="addMovie()" class="btn btn-primary">Add movie</button>
         </div>
     </div>
+</div>
 </div>

@@ -2,6 +2,18 @@
     margin: 15px;
 }
 
+.s-title {
+	color: #FFFFFF;
+}
+
+.dark-panel {
+	background: #302e2e;
+	position: relative;
+	height: 70%;
+	width: 100%;
+	padding: 5px;
+}
+
 .panel-adding .panel-body {
     padding: 20px;
 }
@@ -31,6 +43,7 @@ h4 {
 }
 
 .h4-admin-functions {
+	color: #FFFFFF;
     margin-top: 50px;
 }
 

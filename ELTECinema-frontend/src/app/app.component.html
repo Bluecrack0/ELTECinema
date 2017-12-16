@@ -1,14 +1,14 @@
 <nav class="navbar navbar-inverse">
   <div class="container">
-    <div class="tutorial">
+    <div class="menu">
       <span>Hello, {{ backendService.user.username }}! </span>
-      <ul>
-        <li (click)="home()">Home</li>
-        <li *ngIf="backendService.isLoggedIn == false" (click)="login()">Login</li>
-        <li *ngIf="backendService.isLoggedIn == false" (click)="register()">Register</li>
-        <li *ngIf="backendService.isLoggedIn == true" (click)="screenings()">Screenings</li>
-        <li *ngIf="backendService.isLoggedIn == true" (click)="accountDetails()">Account Details</li>
-      </ul>
+		<div class="topnav">
+			<a (click)="home()">Home</a>
+			<a *ngIf="backendService.isLoggedIn == false" (click)="login()">Login</a>
+			<a *ngIf="backendService.isLoggedIn == false" (click)="register()">Registration</a>
+			<a *ngIf="backendService.isLoggedIn == true" (click)="screenings()">Reservation</a>
+			<a *ngIf="backendService.isLoggedIn == true" (click)="accountDetails()">Account</a>
+		</div>
     </div>
   </div>
 </nav>
@@ -17,4 +17,6 @@
         <router-outlet></router-outlet>
     </div>
 </div>
+
+
 
