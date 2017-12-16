@@ -155,3 +155,5 @@ Minden tesztosztály tranzakcionális, vagyis visszaállítja az adatbázist konziszt
 Az integrációs teszt legfontosabb részét ezzel lefedtük.
 A tesztek nagyrészt az import.sql dummy adatok betöltésére támaszkodnak és ezeket az adatokat próbálják vizsgálni.
 Természetesen a tesztek során gyakran elofordul, hogy új adatok kerülnek betöltésre, de a tranzakció lejártával ezek törlodnek.
+
+![alt text](https://image.ibb.co/hv9JZm/teszts.png "Sikeres tesztek")
