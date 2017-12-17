@@ -35,7 +35,7 @@ export class AppComponent {
   }
 
   accountDetails() {
-    this.router.navigate(['/accountDetails'])
+    this.router.navigate(['/userdetails'])
   }
 
   logout() {
