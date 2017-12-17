@@ -192,6 +192,11 @@ public class UserController implements ControllerInterface<User> {
         return "\""+"updated"+"\"";
     }
 
+    @GetMapping("/getUserByUsername")
+    public User getByUserName(@RequestParam(value = "username") String userName) {
+        return userService.getUserDao().findByUsername(userName);
+    }
+
     @GetMapping("/generateConfCode")
     @Role(USER)
     public String generateAndSendConfirmationCode(@RequestParam(value = "mail") String semail) throws EmailException {
