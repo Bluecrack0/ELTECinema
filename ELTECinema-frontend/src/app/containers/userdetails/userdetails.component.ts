@@ -75,6 +75,6 @@ export class UserDetailsComponent implements OnInit {
     }
     update() {
       console.log("Updating");
-      console.log(this.cinemaBackendService.updateUser());
+      console.log(this.cinemaBackendService.updateUser(this.cinemaBackendService.user));
     }
 }

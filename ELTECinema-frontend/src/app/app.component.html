@@ -8,8 +8,8 @@
 			<a *ngIf="backendService.isLoggedIn == false" (click)="register()">Registration</a>
 			<a *ngIf="backendService.isLoggedIn == true" (click)="screenings()">Reservation</a>
 			<a *ngIf="backendService.isLoggedIn == true" (click)="accountDetails()">Account</a>
-			<li *ngIf="backendService.isLoggedIn == true" (click)="logout()">Logout</li>
-			<li *ngIf="backendService.isLoggedIn == true" (click)="bookings()">My Bookings</li>
+			<a *ngIf="backendService.isLoggedIn == true" (click)="logout()">Logout</a>
+			<a *ngIf="backendService.isLoggedIn == true" (click)="bookings()">My Bookings</a>
 		</div>
     </div>
   </div>
