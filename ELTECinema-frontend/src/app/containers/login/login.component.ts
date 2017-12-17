@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
         this.cinemaBackendService.login(this.user).subscribe(response => {
             console.log(response);
             if (response != null) { //;sikerült bejelentkezni
+				this._cookieService.put("user", this.cinemaBackendService.user.username);
                 console.log(response);
                 this.cinemaBackendService.isLoggedIn = true;
                 this.cinemaBackendService.user = this.userFromJson(response);

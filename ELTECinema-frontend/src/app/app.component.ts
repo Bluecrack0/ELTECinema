@@ -14,7 +14,8 @@ import {NgModule} from "@angular/core/src/metadata/ng_module";
 export class AppComponent {
   constructor(
     private backendService: CinemaBackendService,
-    private router: Router
+    private router: Router,
+	private cookieService: CookieService
   ) { }
 
   register() {
@@ -35,6 +36,15 @@ export class AppComponent {
 
   accountDetails() {
     this.router.navigate(['/accountDetails'])
+  }
+
+  logout() {
+    this.backendService.init();
+    this.router.navigate(['/login']);
+  }
+
+  bookings() {
+    this.router.navigate(['/bookings']);
   }
 
 }

@@ -15,6 +15,7 @@ import { CinemaBackendService } from './services/cinemaBackend.service';
 import { AgeLimitPipe } from './pipes/ageLimit.pipe'
 import {HomeComponent} from "./containers/home/home.component";
 import {UserDetailsComponent} from "./containers/userdetails/userdetails.component";
+import {BookingComponent} from "./containers/bookings/bookings.component";
 
 const routes: Routes = [
     {
@@ -38,8 +39,12 @@ const routes: Routes = [
         component: ScreeningsComponent
     },
     {
-      path: 'accountDetails',
-      component: UserDetailsComponent
+        path: 'userdetails',
+        component: UserDetailsComponent
+    },
+    {
+        path: 'bookings',
+        component: BookingComponent
     }
 ];
 
@@ -52,7 +57,8 @@ const routes: Routes = [
         AgeLimitPipe,
         AppComponent,
         HomeComponent,
-        UserDetailsComponent
+        UserDetailsComponent,
+        BookingComponent
     ],
     imports: [
         BrowserModule,
