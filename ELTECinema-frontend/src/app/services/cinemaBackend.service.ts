@@ -46,8 +46,6 @@ export class CinemaBackendService {
       if (this.cookieService.get("user") != null) {
         this.isLoggedIn = true;
         this.getByUsername(this.cookieService.get("user")).subscribe(response => {
-          console.log(this.cookieService.get("user"));
-          console.log(response);
           this.user = this.userFromJson(response);
         });
       }
@@ -87,7 +85,7 @@ export class CinemaBackendService {
       return this.getNoParam<string>(BASE_URL + '/user/generateConfCode?mail='+email);
     }
     updateUser(user: User) {
-        return this.post<void>(BASE_URL + 'user/create', user);
+        return this.postBody<User>(BASE_URL + 'user/update', user);
     }
 
     login(user: User) {
@@ -160,6 +158,6 @@ export class CinemaBackendService {
     }
 
     postBody<TResponse>(action:string, body: any) {
-        return this.http.post(action, this.user);
+        return this.http.post(action, body);
     }
 }

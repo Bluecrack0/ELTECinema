@@ -74,7 +74,17 @@ export class UserDetailsComponent implements OnInit {
       return this.cinemaBackendService.user.email;
     }
     update() {
-      console.log("Updating");
-      console.log(this.cinemaBackendService.updateUser(this.cinemaBackendService.user));
+      this.cinemaBackendService.updateUser(this.cinemaBackendService.user).subscribe(resp => {
+
+      },
+      err => {
+
+      });
+
+        this.isNamePressed = false;
+        this.isPhoneNumberPressed = false;
+        this.isAddressPressed = false;
+        this.isAgePressed = false;
+        this.isEmailPressed= false;
     }
 }

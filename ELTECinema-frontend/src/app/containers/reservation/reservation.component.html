@@ -47,8 +47,9 @@
     </div>
 </div>
 </div>
-<div *ngIf="missingDetails == true">
-  <h1>Sorry, but some of your details are missing (Phone Number etc.)</h1>
-  <h2>Please go into account details and change your details before making a reservation!</h2>
+<div *ngIf="missingDetails == true" class="panel panel-default">
+  <h4>Sorry, but some of your details are missing (Phone Number etc.)</h4>
+  <h4>Please go into account details and change your details before making a reservation!</h4>
+  <button (click)="redirectToAccount()" class="btn btn-success">Go to my account</button>
 </div>
 </div>

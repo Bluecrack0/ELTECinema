@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
                 private router: Router,
                 private _cookieService:CookieService) {
       this.fgetNews();
-      console.log(this.news);
     }
 
     fgetNews() {

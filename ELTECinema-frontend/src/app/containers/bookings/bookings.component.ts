@@ -37,7 +37,9 @@ export class BookingComponent implements OnInit {
     }
 
     deleteBooking(id) {
-        this.cinemaBackendService.deleteReservation(id).subscribe(resp => console.log(resp), err => {
+        this.cinemaBackendService.deleteReservation(id).subscribe(resp => {
+
+        }, err => {
           alert("Internal server error.");
         });
         location.reload();

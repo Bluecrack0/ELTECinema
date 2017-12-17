@@ -28,7 +28,9 @@ export class RegistrationComponent {
     regSuccessful: boolean = false;
     codeSuccessful: boolean = false;
 
-    constructor(private cinemaBackendService: CinemaBackendService, private router: Router) { console.log(this.cinemaBackendService.isLoggedIn); }
+    constructor(private cinemaBackendService: CinemaBackendService, private router: Router) {
+
+    }
 
     register() {
         if (this.passwordConfirm != this.user.password) {
@@ -38,9 +40,8 @@ export class RegistrationComponent {
         this.cinemaBackendService.register(this.user).subscribe(response => {
             this.regSuccessful = true;
             this.getConfCode(this.user.email).subscribe(response => {
-              console.log(response);
               this.passwordConfirm = response['code'];
-            }, err => { console.log(err); });
+            }, err => { });
             //this.router.navigate(['/login']);
         }, (err) => {alert("Username already exists!") });
     }

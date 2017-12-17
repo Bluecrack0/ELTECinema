@@ -31,13 +31,14 @@ export class ReservationComponent implements OnInit, OnDestroy {
     missingDetails: boolean = false;
 
     constructor(private route: ActivatedRoute, private cinemaBackendService: CinemaBackendService, private router: Router) {
+
       if (!this.cinemaBackendService.isLoggedIn) {
-        alert("You are not logged in so you can't see the screenings!");
-        this.router.navigate(['/login']);
+        alert("You are not logged in!");
+        router.navigate(['/login']);
       } else {
-        if (this.cinemaBackendService.user.address === ""
-        || this.cinemaBackendService.user.phoneNumber === ""
-        || this.cinemaBackendService.user.fullName === "") {
+        if (this.cinemaBackendService.user.address == ""
+          || this.cinemaBackendService.user.phoneNumber == ""
+          || this.cinemaBackendService.user.fullName == "") {
           this.missingDetails = true;
         }
       }
@@ -72,7 +73,20 @@ export class ReservationComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
+  redirectToAccount() {
+    this.router.navigate(['/userdetails']);
+  }
     selectScreening() {
+      if (!this.cinemaBackendService.isLoggedIn) {
+        alert("You are not logged in!");
+        this.router.navigate(['/login']);
+      } else {
+        if (!this.cinemaBackendService.user.address
+          || !this.cinemaBackendService.user.phoneNumber
+          || !this.cinemaBackendService.user.fullName) {
+          this.missingDetails = true;
+        }
+      }
         this.cinemaBackendService.getAllReservationsToScreening(this.selectedScreening.id).subscribe(reservations => {
             this.reservationList = reservations;
             this.reservations = {};
