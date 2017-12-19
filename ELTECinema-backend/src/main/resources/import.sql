@@ -21,5 +21,5 @@ INSERT INTO RESERVATIONS VALUES (1, 6, 6, 0, 1);
 INSERT INTO ACTOR_MOVIE VALUES (0, 0);
 INSERT INTO ACTOR_MOVIE VALUES (1, 1);
 
-INSERT INTO NEWS VALUES (0, 'asd', '2017-11-12', 'ASD');
-INSERT INTO NEWS VALUES (1, 'xasd', '2017-12-12', 'XASD');
+INSERT INTO NEWS VALUES (0, 'We are waiting for you with four Tarantino movies. We hope you'll enjoy.', '2017-11-12', 'We are open');
+INSERT INTO NEWS VALUES (1, 'In the opinion of the well known CinemaCritics, our cinema is one of the best in the country.', '2017-12-12', 'Good critics');
